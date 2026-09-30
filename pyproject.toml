@@ -28,6 +28,8 @@ dependencies = [
     "rich",
     "pydantic",
     "textual",
+    "fastapi",
+    "uvicorn[standard]",
 ]
 
 [project.optional-dependencies]
