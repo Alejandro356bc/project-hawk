@@ -1,0 +1,8 @@
+global-exclude .env .env.* *.pem *.key *.p12 *.pfx
+prune .direnv
+prune build
+prune dist
+prune venv
+
+# The empty public template is safe and useful to source-distribution users.
+include .env.example
