@@ -59,4 +59,4 @@ Thumbs.db
 _tmp_*.py
 _check_*.py
 $null
-/frontend/
+__agent__/
