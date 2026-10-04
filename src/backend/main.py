@@ -23,7 +23,7 @@ app = FastAPI(title="Hawk API", description="Backend for Hawk multi-LLM debates"
 # HAWK_CORS_ORIGINS: comma-separated list of allowed origins.
 # In production (Render), set this to your frontend URL, e.g.:
 #   https://project-hawk.onrender.com
-_raw_origins = os.environ.get("HAWK_CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+_raw_origins = os.environ.get("HAWK_CORS_ORIGINS", "https://project-hawk-backend.onrender.com")
 _allowed_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
 
 app.add_middleware(
