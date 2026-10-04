@@ -9,7 +9,7 @@ import { ALL_PROVIDERS } from "../../_lib/providers";
 
 const nameOf = Object.fromEntries(ALL_PROVIDERS.map((p) => [p.id, p.name]));
 
-const ENGINE_URL = process.env.HAWK_ENGINE_URL || "http://127.0.0.1:8787";
+const ENGINE_URL = process.env.HAWK_ENGINE_URL || "https://project-hawk-backend.onrender.com";
 const PANEL_SIZE = 3;
 
 interface Body {
