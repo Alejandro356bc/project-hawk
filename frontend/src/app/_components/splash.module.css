@@ -1,0 +1,255 @@
+/* Full-screen loader: the hawk draws itself on the night sky, then the screen fades away. */
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  color: #fff;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 104%, rgba(242, 180, 142, 0.35) 0%, rgba(242, 180, 142, 0) 70%),
+    linear-gradient(180deg, #0a0e28 0%, #161d4f 50%, #2b2f6e 100%);
+  transition:
+    opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.55s;
+  /* Fallback: never trap the page behind the loader if scripts don't run. */
+  animation: autoHide 0.6s ease 4s forwards;
+}
+
+.leaving {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.leaving .emblem {
+  transform: scale(1.08);
+}
+
+/* a faint starfield */
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 28% 72%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 44% 30%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 63% 12%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 78% 58%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 88% 26%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 8% 52%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1.5px 1.5px at 54% 84%, rgba(255, 255, 255, 0.4), transparent);
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+.emblem {
+  position: relative;
+  width: 148px;
+  height: 148px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: rise 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+
+/* dashed orbit turning around the logo */
+.orbit {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 1.5px dashed rgba(201, 214, 255, 0.45);
+  animation: spin 9s linear infinite;
+}
+
+.glow {
+  position: absolute;
+  inset: 22px;
+  border-radius: 999px;
+  background: rgba(47, 98, 234, 0.45);
+  filter: blur(18px);
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+.disc {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow:
+    0 0 0 8px rgba(47, 98, 234, 0.22),
+    0 24px 50px -12px rgba(47, 98, 234, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  display: grid;
+  place-items: center;
+}
+
+.hawk {
+  overflow: visible;
+}
+
+.sun {
+  fill: #8fb0ff;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    pop 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) 0.6s both,
+    pulse 2s ease-in-out 1s infinite;
+}
+
+/* wings beat gently */
+.wings {
+  transform-box: fill-box;
+  transform-origin: 50% 40%;
+  animation: flap 1.4s ease-in-out 0.9s infinite;
+}
+
+/* the outline traces itself, then fills in */
+.body,
+.head {
+  fill: #fff;
+  fill-opacity: 0;
+  stroke: #fff;
+  stroke-width: 0.7;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation:
+    draw 0.65s cubic-bezier(0.6, 0, 0.3, 1) 0.1s forwards,
+    fillIn 0.35s ease 0.6s forwards;
+}
+
+.word {
+  position: relative;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 28px rgba(143, 176, 255, 0.55);
+  animation: fadeUp 0.45s ease 0.35s both;
+}
+
+/* thin progress line that sweeps */
+.bar {
+  position: relative;
+  width: 132px;
+  height: 3px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+  animation: fadeUp 0.45s ease 0.45s both;
+}
+
+.bar span {
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(143, 176, 255, 0), #8fb0ff, rgba(143, 176, 255, 0));
+  animation: sweep 1.2s ease-in-out infinite;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fillIn {
+  to {
+    fill-opacity: 1;
+  }
+}
+
+@keyframes flap {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.82);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes sweep {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(260%);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes autoHide {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* With reduced motion the global rule stops all animation; show the finished logo. */
+@media (prefers-reduced-motion: reduce) {
+  .body,
+  .head {
+    stroke-dashoffset: 0;
+    fill-opacity: 1;
+  }
+}

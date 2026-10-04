@@ -1,0 +1,62 @@
+# Secrets - never commit
+.env
+.env.*
+!.env.example
+.envrc
+.direnv/
+.npmrc
+.pypirc
+.netrc
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+credentials.json
+service-account*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+pip-wheel-metadata/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Tooling caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs and local runtime artifacts
+*.log
+hawk.log
+agy_*.txt
+*.tmp
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Temporary analysis scripts created by panelists
+_tmp_*.py
+_check_*.py
+$null
+__agent__/

@@ -1,0 +1,229 @@
+/* The Hawk "solar system": seated panel on the inner ring, other providers outside. */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinRev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.pulse {
+  animation: pulse 2.4s ease-out infinite;
+}
+
+.tag {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font: 600 10px var(--font-geist-mono), monospace;
+}
+
+.tagApprove {
+  background: rgba(95, 212, 190, 0.14);
+  color: #5fd4be;
+}
+
+.tagReject {
+  background: rgba(255, 154, 98, 0.14);
+  color: #ff9a62;
+}
+
+.tagSpeaking {
+  background: rgba(143, 176, 255, 0.16);
+  color: var(--accent-light);
+}
+
+.orbit {
+  position: relative;
+  width: min(100%, 520px);
+  aspect-ratio: 1 / 1;
+}
+
+.ringOuter,
+.ringInner {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.ringOuter {
+  inset: 5%;
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+}
+
+.ringInner {
+  inset: 22%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(47, 98, 234, 0.06);
+}
+
+.orbitA,
+.orbitB {
+  position: absolute;
+  inset: 0;
+}
+
+.orbitA {
+  animation: spin 48s linear infinite;
+}
+
+.orbitA .upright {
+  animation: spinRev 48s linear infinite;
+}
+
+.orbitB {
+  animation: spinRev 90s linear infinite;
+}
+
+.orbitB .upright {
+  animation: spin 90s linear infinite;
+}
+
+.body {
+  position: absolute;
+}
+
+.bodySmall {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+}
+
+.bodySmall .upright {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.04),
+    0 8px 18px -8px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bodySmall img {
+  opacity: 0.85;
+}
+
+.bodyLarge {
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+}
+
+.bodyLarge .upright {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.planet {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 0 0 6px rgba(255, 255, 255, 0.05),
+    0 14px 28px -10px rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.planetSpeaking {
+  border: 2px solid var(--accent);
+}
+
+.speakingRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+}
+
+.planetLabel {
+  position: absolute;
+  left: 50%;
+  top: 66px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.planetName {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ececf0;
+}
+
+.beam {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 28%;
+  height: 0;
+  border-top: 1px dashed rgba(255, 255, 255, 0.22);
+  transform-origin: 0 0;
+}
+
+.beamSpeaking {
+  border-top: 2px solid var(--accent);
+}
+
+.sun {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 116px;
+  height: 116px;
+  margin: -58px 0 0 -58px;
+}
+
+.sunGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--accent-soft);
+}
+
+.sunCore {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  box-shadow:
+    0 0 0 10px var(--accent-soft),
+    0 24px 50px -12px var(--accent-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+

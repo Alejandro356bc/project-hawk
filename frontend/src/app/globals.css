@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+:root {
+  --accent: #2f62ea;
+  --accent-soft: rgba(47, 98, 234, 0.1);
+  --accent-shadow: rgba(47, 98, 234, 0.55);
+  --accent-light: #8fb0ff;
+
+  --ink: #0d0f14;
+  --ink-2: #22262f;
+  --text: #2a2e38;
+  --muted: #4b5160;
+  --muted-2: #5b6170;
+  --caption: #6a7080;
+
+  --ground: #f7f8fb;
+  --surface: #ffffff;
+  --line: #e3e6ee;
+  --line-soft: #eceef3;
+
+  --approve: #0b5e57;
+  --approve-bg: #e3f3ef;
+  --approve-bar: #0f766e;
+  --reject: #a8380a;
+  --reject-bg: #fdece3;
+  --reject-bar: #ea7a3a;
+
+  --background: var(--ground);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* ---------- buttons: one smooth feel across the whole site ---------- */
+
+:root {
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --press: 0.1s;
+}
+
+a,
+button,
+[role="tab"],
+[role="switch"] {
+  cursor: pointer;
+  transition:
+    color 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.28s var(--ease-out),
+    opacity 0.22s ease,
+    filter 0.22s ease,
+    transform 0.22s var(--ease-out);
+}
+
+button svg,
+a svg {
+  transition: transform 0.25s var(--ease-out);
+}
+
+/* Every button and button-like link gives a quick "press" when clicked.
+   !important so it wins over any page's hover lift while the mouse is down
+   (the reduced-motion rule below still overrides it). */
+button:not(:disabled):active,
+a[href]:active {
+  transform: scale(0.97) !important;
+  transition-duration: var(--press);
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* No lift, nudge or press movement either: colors still change on hover. */
+  a:hover,
+  a[href]:active,
+  button:hover,
+  button:not(:disabled):active,
+  a:hover svg,
+  button:hover svg {
+    transform: none !important;
+  }
+}
