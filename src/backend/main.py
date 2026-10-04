@@ -7,6 +7,7 @@ only needs to listen on localhost.
 
 import json
 import logging
+import os
 from typing import AsyncGenerator
 
 from fastapi import FastAPI
@@ -19,11 +20,15 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name
 
 app = FastAPI(title="Hawk API", description="Backend for Hawk multi-LLM debates")
 
-# The browser never calls this API directly (the Next.js server proxies it), so
-# only the local dev frontend is allowed, and no credentials are involved.
+# HAWK_CORS_ORIGINS: comma-separated list of allowed origins.
+# In production (Render), set this to your frontend URL, e.g.:
+#   https://project-hawk.onrender.com
+_raw_origins = os.environ.get("HAWK_CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+_allowed_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=_allowed_origins,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
